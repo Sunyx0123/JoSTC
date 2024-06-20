@@ -1708,8 +1708,9 @@ class FullModel(object):
                 params_pred_np = params_pred[img_i].cpu().data.numpy()  # (seq_num, 4, 2), in full size
                 starting_states_np = starting_states[img_i].cpu().data.numpy()  # (seq_num), {1.0, 0.0}
                 params_pred_list = seq_params_to_list(params_pred_np, starting_states_np)  # list of (N_point, 2), in image size
+                params_pred_array = np.array(params_pred_list, dtype=object)
                 params_pred_save_npz_path = os.path.join(pred_params_save_root, target_id + '.npz')
-                np.savez(params_pred_save_npz_path, strokes_data=params_pred_list)
+                np.savez(params_pred_save_npz_path, strokes_data=params_pred_array)
 
                 raster_images_pred = raster_images_pred.cpu().data.numpy()
                 raster_images_pred = (np.array(raster_images_pred[img_i]) * 255.0).astype(np.uint8)

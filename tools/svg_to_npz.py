@@ -189,9 +189,10 @@ def svg_to_npz(database, ref_image):
         # print('segment_num', segment_num)
         max_seq_num += segment_num
     print('max_seq_num', max_seq_num)
+    norm_strokes_array = np.array(norm_strokes_list, dtype=object)
 
     save_npz_path = os.path.join(save_base_parameter, ref_id + '.npz')
-    np.savez(save_npz_path, strokes_data=norm_strokes_list, canvas_size=img_width)
+    np.savez(save_npz_path, strokes_data=norm_strokes_array, canvas_size=img_width)
 
     # visualization
     pydiffvg.set_use_gpu(torch.cuda.is_available())
